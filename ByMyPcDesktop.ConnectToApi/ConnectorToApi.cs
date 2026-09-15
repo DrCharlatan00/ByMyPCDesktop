@@ -32,5 +32,15 @@ namespace ByMyPcDesktop.ConnectToApi
             if (data is null) throw new ApiGetException();
             return data;
         }
+
+        public async Task<IEnumerable<CpuModelGet>> SearchByNameCpu(string name) 
+        {
+            var data = await cpuService.SearchByName(name);
+            if (data is null) throw new ApiGetException();
+            return data;
+
+        }
+
+
     }
 }

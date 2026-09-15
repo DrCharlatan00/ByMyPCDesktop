@@ -33,5 +33,13 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
 
             return await request.Content.ReadFromJsonAsync<IEnumerable<CpuModelGet>>();
         }
+
+        public async Task<IEnumerable<CpuModelGet>?> SearchByName(string name) {
+            var request = await httpClient.GetAsync($"/api/cpu/search-name?name={name}");
+
+            if (!request.IsSuccessStatusCode) return null;
+
+            return await request.Content.ReadFromJsonAsync<IEnumerable<CpuModelGet>>();
+        }
     }
 }

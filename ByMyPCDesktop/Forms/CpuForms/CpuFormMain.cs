@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -83,5 +84,19 @@ namespace ByMyPCDesktop.Forms.CpuForms
 #endif
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //private async void pictureBox1_Click(object sender, EventArgs e)
+        //{
+        //    try {
+        //        var data = await connector.SearchByNameCpu(textSearchBox.Text ?? "");
+
+        //        bindingSource.DataSource = new BindingList<CpuModelGet>
+        //    }
+        //}
     }
 }

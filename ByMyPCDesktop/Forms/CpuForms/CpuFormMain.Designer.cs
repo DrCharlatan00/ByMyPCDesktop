@@ -35,8 +35,14 @@
             BtnPageUp = new Button();
             BtnPageDown = new Button();
             BtnGetFullDataPag = new Button();
+            textSearchBox = new TextBox();
+            UILabelByName = new Label();
+            searchBox = new GroupBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)CpuTable).BeginInit();
             BoxDataView.SuspendLayout();
+            searchBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // CpuTable
@@ -113,11 +119,53 @@
             BtnGetFullDataPag.UseVisualStyleBackColor = true;
             BtnGetFullDataPag.Click += BtnGetFullDataPag_Click;
             // 
+            // textSearchBox
+            // 
+            textSearchBox.Location = new Point(6, 53);
+            textSearchBox.Name = "textSearchBox";
+            textSearchBox.Size = new Size(138, 23);
+            textSearchBox.TabIndex = 3;
+            // 
+            // UILabelByName
+            // 
+            UILabelByName.AutoSize = true;
+            UILabelByName.Location = new Point(6, 35);
+            UILabelByName.Name = "UILabelByName";
+            UILabelByName.Size = new Size(91, 15);
+            UILabelByName.TabIndex = 4;
+            UILabelByName.Text = "Search by name";
+            UILabelByName.Click += label1_Click;
+            // 
+            // searchBox
+            // 
+            searchBox.BackColor = SystemColors.ControlLight;
+            searchBox.Controls.Add(pictureBox1);
+            searchBox.Controls.Add(textSearchBox);
+            searchBox.Controls.Add(UILabelByName);
+            searchBox.Location = new Point(608, 162);
+            searchBox.Name = "searchBox";
+            searchBox.Size = new Size(200, 111);
+            searchBox.TabIndex = 5;
+            searchBox.TabStop = false;
+            searchBox.Text = "Search";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.icons8_поиск_50;
+            pictureBox1.Location = new Point(150, 53);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(28, 23);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // CpuFormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(995, 531);
+            Controls.Add(searchBox);
             Controls.Add(BoxDataView);
             Controls.Add(CpuTable);
             MaximumSize = new Size(1011, 570);
@@ -128,6 +176,9 @@
             ((System.ComponentModel.ISupportInitialize)CpuTable).EndInit();
             BoxDataView.ResumeLayout(false);
             BoxDataView.PerformLayout();
+            searchBox.ResumeLayout(false);
+            searchBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -140,5 +191,9 @@
         private Label CounterPage;
         private Button BtnPageUp;
         private Button BtnPageDown;
+        private TextBox textSearchBox;
+        private Label UILabelByName;
+        private GroupBox searchBox;
+        private PictureBox pictureBox1;
     }
 }
