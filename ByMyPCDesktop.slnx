@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ByMyPcDesktop.ConnectToApi/ByMyPcDesktop.ConnectToApi.csproj" />
+  <Project Path="ByMyPCDesktop/ByMyPCDesktop.csproj" />
+</Solution>
