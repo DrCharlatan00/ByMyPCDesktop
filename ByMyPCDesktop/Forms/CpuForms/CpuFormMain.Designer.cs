@@ -39,10 +39,13 @@
             UILabelByName = new Label();
             searchBox = new GroupBox();
             pictureBox1 = new PictureBox();
+            GuidSearchBox = new TextBox();
+            UISearchImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)CpuTable).BeginInit();
             BoxDataView.SuspendLayout();
             searchBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)UISearchImage).BeginInit();
             SuspendLayout();
             // 
             // CpuTable
@@ -125,6 +128,7 @@
             textSearchBox.Name = "textSearchBox";
             textSearchBox.Size = new Size(138, 23);
             textSearchBox.TabIndex = 3;
+            textSearchBox.KeyDown += textSearchBox_KeyDown;
             // 
             // UILabelByName
             // 
@@ -139,12 +143,14 @@
             // searchBox
             // 
             searchBox.BackColor = SystemColors.ControlLight;
+            searchBox.Controls.Add(UISearchImage);
             searchBox.Controls.Add(pictureBox1);
+            searchBox.Controls.Add(GuidSearchBox);
             searchBox.Controls.Add(textSearchBox);
             searchBox.Controls.Add(UILabelByName);
             searchBox.Location = new Point(608, 162);
             searchBox.Name = "searchBox";
-            searchBox.Size = new Size(200, 111);
+            searchBox.Size = new Size(200, 149);
             searchBox.TabIndex = 5;
             searchBox.TabStop = false;
             searchBox.Text = "Search";
@@ -159,6 +165,25 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
+            // 
+            // GuidSearchBox
+            // 
+            GuidSearchBox.Location = new Point(6, 100);
+            GuidSearchBox.Name = "GuidSearchBox";
+            GuidSearchBox.Size = new Size(138, 23);
+            GuidSearchBox.TabIndex = 3;
+            GuidSearchBox.KeyDown += textSearchBox_KeyDown;
+            // 
+            // UISearchImage
+            // 
+            UISearchImage.Image = Properties.Resources.icons8_поиск_50;
+            UISearchImage.Location = new Point(150, 100);
+            UISearchImage.Name = "UISearchImage";
+            UISearchImage.Size = new Size(28, 23);
+            UISearchImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            UISearchImage.TabIndex = 5;
+            UISearchImage.TabStop = false;
+            UISearchImage.Click += UISearchImage_Click;
             // 
             // CpuFormMain
             // 
@@ -179,6 +204,7 @@
             searchBox.ResumeLayout(false);
             searchBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)UISearchImage).EndInit();
             ResumeLayout(false);
         }
 
@@ -195,5 +221,7 @@
         private Label UILabelByName;
         private GroupBox searchBox;
         private PictureBox pictureBox1;
+        private PictureBox UISearchImage;
+        private TextBox GuidSearchBox;
     }
 }

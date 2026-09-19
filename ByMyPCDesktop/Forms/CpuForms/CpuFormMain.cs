@@ -90,13 +90,43 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
         }
 
-        //private async void pictureBox1_Click(object sender, EventArgs e)
-        //{
-        //    try {
-        //        var data = await connector.SearchByNameCpu(textSearchBox.Text ?? "");
+        private async void pictureBox1_Click(object sender, EventArgs e)
+        {
+            await SearchByName();
+        }
 
-        //        bindingSource.DataSource = new BindingList<CpuModelGet>
-        //    }
-        //}
+        private async Task SearchByName()
+        {
+            try
+            {
+                var data = await connector.SearchByNameCpu(textSearchBox.Text ?? "");
+
+                bindingSource.DataSource = new BindingList<CpuModelGet>(data.ToList());
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                MessageBox.Show(this, $"Data not get {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+
+#if !DEBUG
+                MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+
+#endif
+            }
+        }
+
+        private async void textSearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await SearchByName();
+            }
+        }
+
+        private void UISearchImage_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
