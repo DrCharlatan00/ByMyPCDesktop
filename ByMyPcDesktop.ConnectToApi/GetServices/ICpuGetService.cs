@@ -8,5 +8,6 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
         Task<IEnumerable<CpuSmallModel>?> GetSmallModel();
         Task<IEnumerable<CpuModelGet>?> GetWithPagFullAsync(int page, int pageSize);
         Task<IEnumerable<CpuModelGet>?> SearchByName(string name);
+        Task<CpuModelGet?> GetByID(Guid id);
     }
 }
