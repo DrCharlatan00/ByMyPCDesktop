@@ -41,5 +41,13 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
 
             return await request.Content.ReadFromJsonAsync<IEnumerable<CpuModelGet>>();
         }
+
+        public async Task<CpuModelGet?> GetByID(Guid id) {
+            var request = await httpClient.GetAsync($"/api/cpu/{id}");
+
+            if (!request.IsSuccessStatusCode) return null;
+
+            return await request.Content.ReadFromJsonAsync<CpuModelGet>();
+        }
     }
 }
