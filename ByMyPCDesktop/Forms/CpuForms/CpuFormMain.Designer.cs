@@ -42,15 +42,21 @@
             UISearchImage = new PictureBox();
             pictureBox1 = new PictureBox();
             GuidSearchBox = new TextBox();
+            ActionBox = new GroupBox();
+            bntDelete = new Button();
+            btnUpdate = new Button();
+            btnCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)CpuTable).BeginInit();
             BoxDataView.SuspendLayout();
             searchBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)UISearchImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ActionBox.SuspendLayout();
             SuspendLayout();
             // 
             // CpuTable
             // 
+            CpuTable.BackgroundColor = Color.Gainsboro;
             CpuTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CpuTable.Location = new Point(12, 12);
             CpuTable.Name = "CpuTable";
@@ -59,10 +65,11 @@
             // 
             // BtnGet
             // 
-            BtnGet.BackColor = SystemColors.Control;
+            BtnGet.BackColor = Color.WhiteSmoke;
+            BtnGet.FlatStyle = FlatStyle.Popup;
             BtnGet.Location = new Point(6, 22);
             BtnGet.Name = "BtnGet";
-            BtnGet.Size = new Size(188, 23);
+            BtnGet.Size = new Size(188, 30);
             BtnGet.TabIndex = 1;
             BtnGet.Text = "Get data";
             BtnGet.UseVisualStyleBackColor = false;
@@ -115,16 +122,19 @@
             // 
             // BtnGetFullDataPag
             // 
-            BtnGetFullDataPag.Location = new Point(6, 51);
+            BtnGetFullDataPag.BackColor = Color.CadetBlue;
+            BtnGetFullDataPag.FlatStyle = FlatStyle.Popup;
+            BtnGetFullDataPag.Location = new Point(6, 66);
             BtnGetFullDataPag.Name = "BtnGetFullDataPag";
             BtnGetFullDataPag.Size = new Size(188, 23);
             BtnGetFullDataPag.TabIndex = 2;
             BtnGetFullDataPag.Text = "Get full data";
-            BtnGetFullDataPag.UseVisualStyleBackColor = true;
+            BtnGetFullDataPag.UseVisualStyleBackColor = false;
             BtnGetFullDataPag.Click += BtnGetFullDataPag_Click;
             // 
             // textSearchBox
             // 
+            textSearchBox.BorderStyle = BorderStyle.FixedSingle;
             textSearchBox.Location = new Point(6, 53);
             textSearchBox.Name = "textSearchBox";
             textSearchBox.Size = new Size(138, 23);
@@ -134,6 +144,7 @@
             // UILabelByName
             // 
             UILabelByName.AutoSize = true;
+            UILabelByName.FlatStyle = FlatStyle.Flat;
             UILabelByName.Location = new Point(6, 35);
             UILabelByName.Name = "UILabelByName";
             UILabelByName.Size = new Size(91, 15);
@@ -160,6 +171,7 @@
             // UISearchByID
             // 
             UISearchByID.AutoSize = true;
+            UISearchByID.FlatStyle = FlatStyle.Popup;
             UISearchByID.Location = new Point(6, 82);
             UISearchByID.Name = "UISearchByID";
             UISearchByID.Size = new Size(72, 15);
@@ -190,17 +202,66 @@
             // 
             // GuidSearchBox
             // 
+            GuidSearchBox.BorderStyle = BorderStyle.FixedSingle;
             GuidSearchBox.Location = new Point(6, 100);
             GuidSearchBox.Name = "GuidSearchBox";
             GuidSearchBox.Size = new Size(138, 23);
             GuidSearchBox.TabIndex = 3;
             GuidSearchBox.KeyDown += GuidSearchBox_KeyDown;
             // 
+            // ActionBox
+            // 
+            ActionBox.BackColor = Color.Wheat;
+            ActionBox.Controls.Add(bntDelete);
+            ActionBox.Controls.Add(btnUpdate);
+            ActionBox.Controls.Add(btnCreate);
+            ActionBox.FlatStyle = FlatStyle.Flat;
+            ActionBox.Location = new Point(12, 369);
+            ActionBox.Name = "ActionBox";
+            ActionBox.Size = new Size(199, 143);
+            ActionBox.TabIndex = 6;
+            ActionBox.TabStop = false;
+            ActionBox.Text = "Action CPU";
+            // 
+            // bntDelete
+            // 
+            bntDelete.BackColor = Color.LightCoral;
+            bntDelete.FlatStyle = FlatStyle.Popup;
+            bntDelete.Location = new Point(28, 114);
+            bntDelete.Name = "bntDelete";
+            bntDelete.Size = new Size(125, 23);
+            bntDelete.TabIndex = 8;
+            bntDelete.Text = "Delete";
+            bntDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.Orange;
+            btnUpdate.FlatStyle = FlatStyle.Popup;
+            btnUpdate.Location = new Point(28, 67);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(125, 23);
+            btnUpdate.TabIndex = 8;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.DarkSeaGreen;
+            btnCreate.FlatStyle = FlatStyle.Popup;
+            btnCreate.Location = new Point(28, 22);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(125, 23);
+            btnCreate.TabIndex = 7;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            // 
             // CpuFormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(995, 531);
+            Controls.Add(ActionBox);
             Controls.Add(searchBox);
             Controls.Add(BoxDataView);
             Controls.Add(CpuTable);
@@ -216,6 +277,7 @@
             searchBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)UISearchImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ActionBox.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -235,5 +297,9 @@
         private PictureBox UISearchImage;
         private TextBox GuidSearchBox;
         private Label UISearchByID;
+        private GroupBox ActionBox;
+        private Button bntDelete;
+        private Button btnUpdate;
+        private Button btnCreate;
     }
 }

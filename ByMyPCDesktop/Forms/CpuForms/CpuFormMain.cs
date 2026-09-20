@@ -179,17 +179,20 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
             return true;
         }
+        #region Froze and Unfroze
 
         private async Task FrozeUI() {
+            ActionBox.Enabled = false;
             searchBox.Enabled = false;
             BoxDataView.Enabled = false;
         }
 
         private async Task UnFrozeUI() {
+            ActionBox.Enabled = true;
             searchBox.Enabled = true;
             BoxDataView.Enabled = true;
         }
-
+        #endregion
         private async void GuidSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
