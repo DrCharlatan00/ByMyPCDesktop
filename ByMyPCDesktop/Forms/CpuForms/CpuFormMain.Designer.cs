@@ -51,7 +51,6 @@
             // 
             // CpuTable
             // 
-            CpuTable.BackgroundColor = Color.Gainsboro;
             CpuTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CpuTable.Location = new Point(12, 12);
             CpuTable.Name = "CpuTable";
@@ -60,11 +59,10 @@
             // 
             // BtnGet
             // 
-            BtnGet.BackColor = Color.WhiteSmoke;
-            BtnGet.FlatStyle = FlatStyle.Popup;
+            BtnGet.BackColor = SystemColors.Control;
             BtnGet.Location = new Point(6, 22);
             BtnGet.Name = "BtnGet";
-            BtnGet.Size = new Size(188, 30);
+            BtnGet.Size = new Size(188, 23);
             BtnGet.TabIndex = 1;
             BtnGet.Text = "Get data";
             BtnGet.UseVisualStyleBackColor = false;
@@ -117,19 +115,16 @@
             // 
             // BtnGetFullDataPag
             // 
-            BtnGetFullDataPag.BackColor = Color.CadetBlue;
-            BtnGetFullDataPag.FlatStyle = FlatStyle.Popup;
-            BtnGetFullDataPag.Location = new Point(6, 66);
+            BtnGetFullDataPag.Location = new Point(6, 51);
             BtnGetFullDataPag.Name = "BtnGetFullDataPag";
             BtnGetFullDataPag.Size = new Size(188, 23);
             BtnGetFullDataPag.TabIndex = 2;
             BtnGetFullDataPag.Text = "Get full data";
-            BtnGetFullDataPag.UseVisualStyleBackColor = false;
+            BtnGetFullDataPag.UseVisualStyleBackColor = true;
             BtnGetFullDataPag.Click += BtnGetFullDataPag_Click;
             // 
             // textSearchBox
             // 
-            textSearchBox.BorderStyle = BorderStyle.FixedSingle;
             textSearchBox.Location = new Point(6, 53);
             textSearchBox.Name = "textSearchBox";
             textSearchBox.Size = new Size(138, 23);
@@ -139,7 +134,6 @@
             // UILabelByName
             // 
             UILabelByName.AutoSize = true;
-            UILabelByName.FlatStyle = FlatStyle.Flat;
             UILabelByName.Location = new Point(6, 35);
             UILabelByName.Name = "UILabelByName";
             UILabelByName.Size = new Size(91, 15);
@@ -150,7 +144,6 @@
             // searchBox
             // 
             searchBox.BackColor = SystemColors.ControlLight;
-            searchBox.Controls.Add(UISearchByID);
             searchBox.Controls.Add(UISearchImage);
             searchBox.Controls.Add(pictureBox1);
             searchBox.Controls.Add(GuidSearchBox);
@@ -184,11 +177,10 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += UIPicSearchName_Click;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // GuidSearchBox
             // 
-            GuidSearchBox.BorderStyle = BorderStyle.FixedSingle;
             GuidSearchBox.Location = new Point(6, 100);
             GuidSearchBox.Name = "GuidSearchBox";
             GuidSearchBox.Size = new Size(138, 23);
@@ -210,7 +202,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(995, 531);
-            Controls.Add(ActionBox);
             Controls.Add(searchBox);
             Controls.Add(BoxDataView);
             Controls.Add(CpuTable);

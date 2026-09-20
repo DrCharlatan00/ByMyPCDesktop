@@ -1,6 +1,5 @@
 ﻿using ByMyPcDesktop.ConnectToApi.Models;
 using System.Net.Http.Json;
-using System.Xml.Linq;
 
 
 namespace ByMyPcDesktop.ConnectToApi.GetServices
