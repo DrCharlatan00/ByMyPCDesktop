@@ -29,11 +29,14 @@ namespace ByMyPCDesktop.Forms.CpuForms
         {
             try
             {
+                await FrozeUI();
+
                 var data = await connector.GetCpuSmallsAsync();
 
                 var bindList = new BindingList<CpuSmallModel>(data.ToList());
 
                 bindingSource.DataSource = bindList;
+                await UnFrozeUI();
             }
             catch (Exception ex)
             {
@@ -45,6 +48,8 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
+                await UnFrozeUI();
+
             }
         }
 
@@ -68,9 +73,12 @@ namespace ByMyPCDesktop.Forms.CpuForms
         {
             try
             {
+                await FrozeUI();
                 IEnumerable<CpuModelGet> data = await connector.GetWithPagFull(Convert.ToInt32(CounterPage.Text), 5);
 
                 bindingSource.DataSource = new BindingList<CpuModelGet>(data.ToList());
+                await UnFrozeUI();
+
             }
             catch (Exception ex)
             {
@@ -82,7 +90,10 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
+                await UnFrozeUI();
+
             }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -92,7 +103,9 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
         private async void UIPicSearchName_Click(object sender, EventArgs e)
         {
+            await FrozeUI();
             await SearchByName();
+            await UnFrozeUI();
         }
 
         private async Task SearchByName()
@@ -113,6 +126,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
+
             }
         }
 
@@ -126,16 +140,20 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
         private async void UISearchID_Click(object sender, EventArgs e)
         {
+            await FrozeUI();
             bool flowControl = await GetByID();
             if (!flowControl)
             {
+                await UnFrozeUI();
                 return;
             }
+            await UnFrozeUI();
 
         }
 
         private async Task<bool> GetByID()
         {
+
             try
             {
                 var data = await connector.GetByID(GuidSearchBox.Text ?? "");
@@ -162,9 +180,24 @@ namespace ByMyPCDesktop.Forms.CpuForms
             return true;
         }
 
+        private async Task FrozeUI() {
+            searchBox.Enabled = false;
+            BoxDataView.Enabled = false;
+        }
+
+        private async Task UnFrozeUI() {
+            searchBox.Enabled = true;
+            BoxDataView.Enabled = true;
+        }
+
         private async void GuidSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
-            await GetByID();
+            if (e.KeyCode == Keys.Enter)
+            {
+                await FrozeUI();
+                await GetByID();
+                await UnFrozeUI();
+            }
         }
     }
 }
