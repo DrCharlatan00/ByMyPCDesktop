@@ -15,6 +15,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
     {
         BindingSource bindingSource = new();
         private readonly ConnectorToApi connector;
+        string ClickedID = string.Empty;
 
         public CpuFormMain(ConnectorToApi connector)
         {
@@ -181,13 +182,15 @@ namespace ByMyPCDesktop.Forms.CpuForms
         }
         #region Froze and Unfroze
 
-        private async Task FrozeUI() {
+        private async Task FrozeUI()
+        {
             ActionBox.Enabled = false;
             searchBox.Enabled = false;
             BoxDataView.Enabled = false;
         }
 
-        private async Task UnFrozeUI() {
+        private async Task UnFrozeUI()
+        {
             ActionBox.Enabled = true;
             searchBox.Enabled = true;
             BoxDataView.Enabled = true;
@@ -200,6 +203,28 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 await FrozeUI();
                 await GetByID();
                 await UnFrozeUI();
+            }
+        }
+
+        private void CpuTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                ClickedID = CpuTable.Rows[e.RowIndex].Cells["ID"].Value.ToString() ?? "";
+
+            }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(ClickedID)) {
+                FormCPUAnswerItem form = new FormCPUAnswerItem(connector);
+                form.ShowDialog(this);
             }
         }
     }
