@@ -138,68 +138,53 @@ namespace ByMyPCDesktop.Forms.CpuForms
             }
         }
 
-        private async void UISearchID_Click(object sender, EventArgs e)
+        private async void UISearchImage_Click(object sender, EventArgs e)
         {
-            await FrozeUI();
-            bool flowControl = await GetByID();
+            bool flowControl = await GetCPUWithIDAsync();
             if (!flowControl)
             {
-                await UnFrozeUI();
                 return;
             }
-            await UnFrozeUI();
-
         }
 
-        private async Task<bool> GetByID()
+        private async Task<bool> GetCPUWithIDAsync()
         {
-
             try
             {
-                var data = await connector.GetByID(GuidSearchBox.Text ?? "");
+                var data = await connector.GetByIDCPU(GuidSearchBox.Text);
+
                 if (data is null)
                 {
-                    MessageBox.Show(this, "CPU Not found", "Item Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "CPU Not Found", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
                 }
+
                 IList<CpuModelGet> cpu = [data!];
                 bindingSource.DataSource = new BindingList<CpuModelGet>(cpu);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(this, "Wrong ID, Please enter valid ID", "Mistake ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
 #if DEBUG
-                MessageBox.Show(this, $"Data not get or wrong GUID \n message: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, $"Data not get {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
 
 #if !DEBUG
-                MessageBox.Show(this,$"GUID Is not valid, please enter valid GUID","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
             }
 
             return true;
         }
-        #region Froze and Unfroze
 
-        private async Task FrozeUI() {
-            ActionBox.Enabled = false;
-            searchBox.Enabled = false;
-            BoxDataView.Enabled = false;
-        }
-
-        private async Task UnFrozeUI() {
-            ActionBox.Enabled = true;
-            searchBox.Enabled = true;
-            BoxDataView.Enabled = true;
-        }
-        #endregion
         private async void GuidSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                await FrozeUI();
-                await GetByID();
-                await UnFrozeUI();
+            if (e.KeyCode == Keys.Enter) {
+                await GetCPUWithIDAsync();
             }
         }
     }

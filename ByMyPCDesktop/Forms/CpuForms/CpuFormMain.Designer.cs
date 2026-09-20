@@ -38,20 +38,15 @@
             textSearchBox = new TextBox();
             UILabelByName = new Label();
             searchBox = new GroupBox();
-            UISearchByID = new Label();
             UISearchImage = new PictureBox();
             pictureBox1 = new PictureBox();
             GuidSearchBox = new TextBox();
-            ActionBox = new GroupBox();
-            bntDelete = new Button();
-            btnUpdate = new Button();
-            btnCreate = new Button();
+            UILabelGUIDSearch = new Label();
             ((System.ComponentModel.ISupportInitialize)CpuTable).BeginInit();
             BoxDataView.SuspendLayout();
             searchBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)UISearchImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ActionBox.SuspendLayout();
             SuspendLayout();
             // 
             // CpuTable
@@ -160,6 +155,7 @@
             searchBox.Controls.Add(pictureBox1);
             searchBox.Controls.Add(GuidSearchBox);
             searchBox.Controls.Add(textSearchBox);
+            searchBox.Controls.Add(UILabelGUIDSearch);
             searchBox.Controls.Add(UILabelByName);
             searchBox.Location = new Point(608, 162);
             searchBox.Name = "searchBox";
@@ -167,16 +163,6 @@
             searchBox.TabIndex = 5;
             searchBox.TabStop = false;
             searchBox.Text = "Search";
-            // 
-            // UISearchByID
-            // 
-            UISearchByID.AutoSize = true;
-            UISearchByID.FlatStyle = FlatStyle.Popup;
-            UISearchByID.Location = new Point(6, 82);
-            UISearchByID.Name = "UISearchByID";
-            UISearchByID.Size = new Size(72, 15);
-            UISearchByID.TabIndex = 6;
-            UISearchByID.Text = "Search By ID";
             // 
             // UISearchImage
             // 
@@ -187,7 +173,7 @@
             UISearchImage.SizeMode = PictureBoxSizeMode.StretchImage;
             UISearchImage.TabIndex = 5;
             UISearchImage.TabStop = false;
-            UISearchImage.Click += UISearchID_Click;
+            UISearchImage.Click += UISearchImage_Click;
             // 
             // pictureBox1
             // 
@@ -209,52 +195,15 @@
             GuidSearchBox.TabIndex = 3;
             GuidSearchBox.KeyDown += GuidSearchBox_KeyDown;
             // 
-            // ActionBox
+            // UILabelGUIDSearch
             // 
-            ActionBox.BackColor = Color.Wheat;
-            ActionBox.Controls.Add(bntDelete);
-            ActionBox.Controls.Add(btnUpdate);
-            ActionBox.Controls.Add(btnCreate);
-            ActionBox.FlatStyle = FlatStyle.Flat;
-            ActionBox.Location = new Point(12, 369);
-            ActionBox.Name = "ActionBox";
-            ActionBox.Size = new Size(199, 143);
-            ActionBox.TabIndex = 6;
-            ActionBox.TabStop = false;
-            ActionBox.Text = "Action CPU";
-            // 
-            // bntDelete
-            // 
-            bntDelete.BackColor = Color.LightCoral;
-            bntDelete.FlatStyle = FlatStyle.Popup;
-            bntDelete.Location = new Point(28, 114);
-            bntDelete.Name = "bntDelete";
-            bntDelete.Size = new Size(125, 23);
-            bntDelete.TabIndex = 8;
-            bntDelete.Text = "Delete";
-            bntDelete.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.BackColor = Color.Orange;
-            btnUpdate.FlatStyle = FlatStyle.Popup;
-            btnUpdate.Location = new Point(28, 67);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(125, 23);
-            btnUpdate.TabIndex = 8;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // btnCreate
-            // 
-            btnCreate.BackColor = Color.DarkSeaGreen;
-            btnCreate.FlatStyle = FlatStyle.Popup;
-            btnCreate.Location = new Point(28, 22);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(125, 23);
-            btnCreate.TabIndex = 7;
-            btnCreate.Text = "Create";
-            btnCreate.UseVisualStyleBackColor = false;
+            UILabelGUIDSearch.AutoSize = true;
+            UILabelGUIDSearch.Location = new Point(6, 82);
+            UILabelGUIDSearch.Name = "UILabelGUIDSearch";
+            UILabelGUIDSearch.Size = new Size(72, 15);
+            UILabelGUIDSearch.TabIndex = 4;
+            UILabelGUIDSearch.Text = "Search by ID";
+            UILabelGUIDSearch.Click += label1_Click;
             // 
             // CpuFormMain
             // 
@@ -277,7 +226,6 @@
             searchBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)UISearchImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ActionBox.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -296,10 +244,6 @@
         private PictureBox pictureBox1;
         private PictureBox UISearchImage;
         private TextBox GuidSearchBox;
-        private Label UISearchByID;
-        private GroupBox ActionBox;
-        private Button bntDelete;
-        private Button btnUpdate;
-        private Button btnCreate;
+        private Label UILabelGUIDSearch;
     }
 }
