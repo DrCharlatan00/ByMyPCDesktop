@@ -29,11 +29,14 @@ namespace ByMyPCDesktop.Forms.CpuForms
         {
             try
             {
+                await FrozeUI();
+
                 var data = await connector.GetCpuSmallsAsync();
 
                 var bindList = new BindingList<CpuSmallModel>(data.ToList());
 
                 bindingSource.DataSource = bindList;
+                await UnFrozeUI();
             }
             catch (Exception ex)
             {
@@ -45,6 +48,8 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
+                await UnFrozeUI();
+
             }
         }
 
@@ -68,9 +73,12 @@ namespace ByMyPCDesktop.Forms.CpuForms
         {
             try
             {
+                await FrozeUI();
                 IEnumerable<CpuModelGet> data = await connector.GetWithPagFull(Convert.ToInt32(CounterPage.Text), 5);
 
                 bindingSource.DataSource = new BindingList<CpuModelGet>(data.ToList());
+                await UnFrozeUI();
+
             }
             catch (Exception ex)
             {
@@ -82,7 +90,10 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
+                await UnFrozeUI();
+
             }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -90,9 +101,11 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
         }
 
-        private async void pictureBox1_Click(object sender, EventArgs e)
+        private async void UIPicSearchName_Click(object sender, EventArgs e)
         {
+            await FrozeUI();
             await SearchByName();
+            await UnFrozeUI();
         }
 
         private async Task SearchByName()
@@ -113,6 +126,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 MessageBox.Show(this,$"Cpu not get, posible service close","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
 
 #endif
+
             }
         }
 
