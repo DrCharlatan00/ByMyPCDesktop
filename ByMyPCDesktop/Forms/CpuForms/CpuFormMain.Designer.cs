@@ -38,14 +38,15 @@
             textSearchBox = new TextBox();
             UILabelByName = new Label();
             searchBox = new GroupBox();
+            UISearchByID = new Label();
+            UISearchImage = new PictureBox();
             pictureBox1 = new PictureBox();
             GuidSearchBox = new TextBox();
-            UISearchImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)CpuTable).BeginInit();
             BoxDataView.SuspendLayout();
             searchBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)UISearchImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // CpuTable
@@ -143,6 +144,7 @@
             // searchBox
             // 
             searchBox.BackColor = SystemColors.ControlLight;
+            searchBox.Controls.Add(UISearchByID);
             searchBox.Controls.Add(UISearchImage);
             searchBox.Controls.Add(pictureBox1);
             searchBox.Controls.Add(GuidSearchBox);
@@ -155,24 +157,14 @@
             searchBox.TabStop = false;
             searchBox.Text = "Search";
             // 
-            // pictureBox1
+            // UISearchByID
             // 
-            pictureBox1.Image = Properties.Resources.icons8_поиск_50;
-            pictureBox1.Location = new Point(150, 53);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(28, 23);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
-            // 
-            // GuidSearchBox
-            // 
-            GuidSearchBox.Location = new Point(6, 100);
-            GuidSearchBox.Name = "GuidSearchBox";
-            GuidSearchBox.Size = new Size(138, 23);
-            GuidSearchBox.TabIndex = 3;
-            GuidSearchBox.KeyDown += textSearchBox_KeyDown;
+            UISearchByID.AutoSize = true;
+            UISearchByID.Location = new Point(6, 82);
+            UISearchByID.Name = "UISearchByID";
+            UISearchByID.Size = new Size(72, 15);
+            UISearchByID.TabIndex = 6;
+            UISearchByID.Text = "Search By ID";
             // 
             // UISearchImage
             // 
@@ -183,7 +175,26 @@
             UISearchImage.SizeMode = PictureBoxSizeMode.StretchImage;
             UISearchImage.TabIndex = 5;
             UISearchImage.TabStop = false;
-            UISearchImage.Click += UISearchImage_Click;
+            UISearchImage.Click += UISearchID_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.icons8_поиск_50;
+            pictureBox1.Location = new Point(150, 53);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(28, 23);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += UIPicSearchName_Click;
+            // 
+            // GuidSearchBox
+            // 
+            GuidSearchBox.Location = new Point(6, 100);
+            GuidSearchBox.Name = "GuidSearchBox";
+            GuidSearchBox.Size = new Size(138, 23);
+            GuidSearchBox.TabIndex = 3;
+            GuidSearchBox.KeyDown += GuidSearchBox_KeyDown;
             // 
             // CpuFormMain
             // 
@@ -203,8 +214,8 @@
             BoxDataView.PerformLayout();
             searchBox.ResumeLayout(false);
             searchBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)UISearchImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -223,5 +234,6 @@
         private PictureBox pictureBox1;
         private PictureBox UISearchImage;
         private TextBox GuidSearchBox;
+        private Label UISearchByID;
     }
 }

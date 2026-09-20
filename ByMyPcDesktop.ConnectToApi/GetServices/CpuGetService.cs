@@ -1,5 +1,6 @@
 ﻿using ByMyPcDesktop.ConnectToApi.Models;
 using System.Net.Http.Json;
+using System.Xml.Linq;
 
 
 namespace ByMyPcDesktop.ConnectToApi.GetServices
@@ -40,6 +41,14 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
             if (!request.IsSuccessStatusCode) return null;
 
             return await request.Content.ReadFromJsonAsync<IEnumerable<CpuModelGet>>();
+        }
+
+        public async Task<CpuModelGet?> GetByID(Guid id) {
+            var request = await httpClient.GetAsync($"/api/cpu/{id}");
+
+            if (!request.IsSuccessStatusCode) return null;
+
+            return await request.Content.ReadFromJsonAsync<CpuModelGet>();
         }
     }
 }

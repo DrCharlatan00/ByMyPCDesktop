@@ -41,6 +41,14 @@ namespace ByMyPcDesktop.ConnectToApi
 
         }
 
+        public async Task<CpuModelGet?> GetByID(string id) {
+            if (!string.IsNullOrEmpty(id) && Guid.TryParse(id, out Guid res)) {
+                var item = await cpuService.GetByID(res);
+                return item;
+            }
+            throw new ArgumentException("Guid is wrong");
+        }
+
 
     }
 }
