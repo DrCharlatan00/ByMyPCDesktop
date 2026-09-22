@@ -268,8 +268,10 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
                 }
                 await GetSmallData();
+                return;
             }
-            
+            MessageBox.Show(this, "CPU not Select, Please click to cpu in table", "CPU Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
         #endregion
     }
