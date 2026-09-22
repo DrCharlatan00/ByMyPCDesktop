@@ -62,6 +62,7 @@
             CpuTable.Name = "CpuTable";
             CpuTable.Size = new Size(590, 351);
             CpuTable.TabIndex = 0;
+            CpuTable.CellClick += CpuTable_CellClick;
             // 
             // BtnGet
             // 
@@ -233,6 +234,7 @@
             bntDelete.TabIndex = 8;
             bntDelete.Text = "Delete";
             bntDelete.UseVisualStyleBackColor = false;
+            bntDelete.Click += bntDelete_Click;
             // 
             // btnUpdate
             // 
@@ -244,6 +246,7 @@
             btnUpdate.TabIndex = 8;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnCreate
             // 
@@ -255,6 +258,7 @@
             btnCreate.TabIndex = 7;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
             // CpuFormMain
             // 

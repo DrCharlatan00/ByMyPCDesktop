@@ -1,13 +1,7 @@
 ﻿using ByMyPcDesktop.ConnectToApi;
+using ByMyPcDesktop.ConnectToApi.Exceptions;
 using ByMyPcDesktop.ConnectToApi.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Forms;
 
 namespace ByMyPCDesktop.Forms.CpuForms
 {
@@ -15,6 +9,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
     {
         BindingSource bindingSource = new();
         private readonly ConnectorToApi connector;
+        string ClickedID = string.Empty;
 
         public CpuFormMain(ConnectorToApi connector)
         {
@@ -26,6 +21,11 @@ namespace ByMyPCDesktop.Forms.CpuForms
         }
 
         private async void BtnGet_Click(object sender, EventArgs e)
+        {
+            await GetSmallData();
+        }
+
+        private async Task GetSmallData()
         {
             try
             {
@@ -74,7 +74,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
             try
             {
                 await FrozeUI();
-                IEnumerable<CpuModelGet> data = await connector.GetWithPagFull(Convert.ToInt32(CounterPage.Text), 5);
+                IEnumerable<CpuModelGet> data = await connector.GetWithPagFull(Convert.ToInt32(CounterPage.Text), 15);
 
                 bindingSource.DataSource = new BindingList<CpuModelGet>(data.ToList());
                 await UnFrozeUI();
@@ -181,13 +181,15 @@ namespace ByMyPCDesktop.Forms.CpuForms
         }
         #region Froze and Unfroze
 
-        private async Task FrozeUI() {
+        private async Task FrozeUI()
+        {
             ActionBox.Enabled = false;
             searchBox.Enabled = false;
             BoxDataView.Enabled = false;
         }
 
-        private async Task UnFrozeUI() {
+        private async Task UnFrozeUI()
+        {
             ActionBox.Enabled = true;
             searchBox.Enabled = true;
             BoxDataView.Enabled = true;
@@ -202,5 +204,75 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 await UnFrozeUI();
             }
         }
+
+        private void CpuTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                ClickedID = CpuTable.Rows[e.RowIndex].Cells["ID"].Value.ToString() ?? "";
+
+            }
+        }
+
+        #region Create Update Delete
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            CreateUpdateFormCPU formUpdate = new(connector);
+            Hide();
+            formUpdate.Show(this);
+        }
+
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(ClickedID))
+            {
+                FormCPUAnswerItem form = new FormCPUAnswerItem(connector);
+                Hide();
+                form.ShowDialog(this);
+                return;
+            }
+            CpuModelGet? cpu = await connector.GetByID(ClickedID);
+            if (cpu is null)
+            {
+                MessageBox.Show(this, "This CPU is not avaible now", "CPU not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            CreateUpdateFormCPU formUpdate = new(connector, cpu);
+            Hide();
+            formUpdate.Show(this);
+
+        }
+        
+
+        private async void bntDelete_Click(object sender, EventArgs e)
+        {
+            await FrozeUI();
+            DialogResult dialogResult = MessageBox.Show(this,"You a sure delete CPU","Delete Cpu",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No) return;
+            if (ClickedID != string.Empty)
+            {
+                try
+                {
+                    await connector.DeleteCpuAsync(Guid.Parse(ClickedID));
+                }
+                catch (ApiOperationFailed<object>)
+                {
+                    MessageBox.Show(this, "This CPU not removed, please check cpu is database", "CPU not removed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (ApiGetException)
+                {
+                    MessageBox.Show(this, "This CPU is not avaible now, please update table", "CPU not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception) {
+                    MessageBox.Show(this, "unexpect CPU not removed, please call administrator", "CPU remove Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                await GetSmallData();
+                return;
+            }
+            MessageBox.Show(this, "CPU not Select, Please click to cpu in table", "CPU Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+        #endregion
     }
 }
