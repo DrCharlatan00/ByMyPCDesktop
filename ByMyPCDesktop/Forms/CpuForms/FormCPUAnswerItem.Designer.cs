@@ -53,6 +53,7 @@
             MinimumSize = new Size(458, 545);
             Name = "FormCPUAnswerItem";
             Text = "FormCPUAnswerItem";
+            FormClosed += FormCPUAnswerItem_FormClosed;
             Load += FormCPUAnswerItem_Load;
             ResumeLayout(false);
         }

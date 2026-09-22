@@ -29,30 +29,36 @@ namespace ByMyPCDesktop.Forms.CpuForms
             foreach (var item in data)
             {
                 CpuView.Nodes[0].Nodes.Add(item.Name);
-                Cpus.Add(new CpuList(item.id,item.Name));
+                Cpus.Add(new CpuList(item.id, item.Name));
             }
         }
 
         private async void CpuView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (IsOne) {
+            if (IsOne)
+            {
                 IsOne = false;
                 return;
             }
             if (e.Node.Text is null) return;
             Guid? idCpu = Cpus.FirstOrDefault(x => x.Name == e?.Node?.Text).Key;
-            if (idCpu is null) 
+            if (idCpu is null)
                 return;
-            
+
             CpuModelGet? item = await connector.GetByID((Guid)idCpu);
-            if (item is null) 
+            if (item is null)
                 return;
-            
-            CreateUpdateFormCPU form = new CreateUpdateFormCPU(connector,item);
+
+            CreateUpdateFormCPU form = new CreateUpdateFormCPU(connector, item);
             form.Show(Owner);
             this.Close();
         }
+
+        private void FormCPUAnswerItem_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Owner?.Show();
+        }
     }
 
-   
+
 }

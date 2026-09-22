@@ -75,7 +75,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
             try
             {
                 await FrozeUI();
-                IEnumerable<CpuModelGet> data = await connector.GetWithPagFull(Convert.ToInt32(CounterPage.Text), 5);
+                IEnumerable<CpuModelGet> data = await connector.GetWithPagFull(Convert.ToInt32(CounterPage.Text), 15);
 
                 bindingSource.DataSource = new BindingList<CpuModelGet>(data.ToList());
                 await UnFrozeUI();
@@ -220,12 +220,23 @@ namespace ByMyPCDesktop.Forms.CpuForms
 
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnUpdate_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(ClickedID)) {
                 FormCPUAnswerItem form = new FormCPUAnswerItem(connector);
+                Hide();
                 form.ShowDialog(this);
+                return;
             }
+            CpuModelGet? cpu = await connector.GetByID(ClickedID);
+            if (cpu is null) {
+                MessageBox.Show(this,"This CPU is not avaible now", "CPU not found",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            CreateUpdateFormCPU formUpdate = new(connector, cpu);
+            Hide();
+            formUpdate.Show(this);
+
         }
     }
 }
