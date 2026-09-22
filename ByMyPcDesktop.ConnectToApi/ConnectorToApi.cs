@@ -1,5 +1,6 @@
 ﻿using ByMyPcDesktop.ConnectToApi.Exceptions;
 using ByMyPcDesktop.ConnectToApi.GetServices;
+using ByMyPcDesktop.ConnectToApi.GetServices.CPUService;
 using ByMyPcDesktop.ConnectToApi.Models;
 
 namespace ByMyPcDesktop.ConnectToApi
@@ -53,6 +54,14 @@ namespace ByMyPcDesktop.ConnectToApi
             return await cpuService.GetByID(id);
         }
 
+        public async Task<CpuModelGet> UpdateAsync(DTOCpuUpdateModel model) {
+            if (model.id == Guid.Empty) {
+                throw new ArgumentException("Guid can't be null or empty, update abort");
+            }
+            CpuModelGet? result = await cpuService.UpdateAsync(model);
+            if (result is null) throw new ApiOperationFailed<CpuModelGet>("Operation update is Failed");
+            return result;
+        }
 
     }
 }

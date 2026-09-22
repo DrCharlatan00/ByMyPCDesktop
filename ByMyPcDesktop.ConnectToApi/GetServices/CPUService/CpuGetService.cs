@@ -1,6 +1,6 @@
-﻿using ByMyPcDesktop.ConnectToApi.Models;
+﻿using ByMyPcDesktop.ConnectToApi.GetServices.CPUService;
+using ByMyPcDesktop.ConnectToApi.Models;
 using System.Net.Http.Json;
-using System.Xml.Linq;
 
 
 namespace ByMyPcDesktop.ConnectToApi.GetServices
@@ -48,6 +48,12 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
 
             if (!request.IsSuccessStatusCode) return null;
 
+            return await request.Content.ReadFromJsonAsync<CpuModelGet>();
+        }
+
+        public async Task<CpuModelGet?> UpdateAsync(DTOCpuUpdateModel model) {
+            var request = await httpClient.PutAsJsonAsync("/api/cpu/",model);
+            if (!request.IsSuccessStatusCode) return null;
             return await request.Content.ReadFromJsonAsync<CpuModelGet>();
         }
     }

@@ -42,6 +42,8 @@
             UICountCoresLabel = new Label();
             UIFrequencyLabel = new Label();
             wrongItemVarsProvider = new ErrorProvider(components);
+            btnAccept = new Button();
+            btnCancel = new Button();
             UIRequiredBox.SuspendLayout();
             UICpuOtherBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)wrongItemVarsProvider).BeginInit();
@@ -79,7 +81,7 @@
             boxSocket.BackColor = Color.White;
             boxSocket.FlatStyle = FlatStyle.System;
             boxSocket.FormattingEnabled = true;
-            boxSocket.Items.AddRange(new object[] { "AM4", "AM3+", "AM3", "AM2", "LGA775", "LGA1551", "LGA1155", "LGA2011" });
+            boxSocket.Items.AddRange(new object[] { "AM4", "AM3+", "AM3", "AM2", "LGA 775", "LGA 1551", "LGA 1155", "LGA 2011" });
             boxSocket.Location = new Point(77, 95);
             boxSocket.Name = "boxSocket";
             boxSocket.Size = new Size(152, 23);
@@ -174,11 +176,33 @@
             // 
             wrongItemVarsProvider.ContainerControl = this;
             // 
+            // btnAccept
+            // 
+            btnAccept.Location = new Point(235, 297);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(128, 23);
+            btnAccept.TabIndex = 6;
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += btnAccept_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.BackColor = SystemColors.AppWorkspace;
+            btnCancel.Location = new Point(369, 297);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(158, 23);
+            btnCancel.TabIndex = 6;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += btnCancel_Click;
+            // 
             // CreateUpdateFormCPU
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 332);
+            Controls.Add(btnCancel);
+            Controls.Add(btnAccept);
             Controls.Add(UICpuOtherBox);
             Controls.Add(UIRequiredBox);
             Name = "CreateUpdateFormCPU";
@@ -206,5 +230,7 @@
         private TextBox frequencyBox;
         private Label UICountCoresLabel;
         private ErrorProvider wrongItemVarsProvider;
+        private Button btnCancel;
+        private Button btnAccept;
     }
 }

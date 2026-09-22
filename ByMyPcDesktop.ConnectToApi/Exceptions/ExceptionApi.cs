@@ -25,4 +25,13 @@ namespace ByMyPcDesktop.ConnectToApi.Exceptions
         {
         }
     }
+
+    public class ApiOperationFailed<T> : ExceptionApi
+    {
+        public T ItemThrow;
+        public ApiOperationFailed(string? message) : base(message) 
+        {
+            
+        }
+    }
 }

@@ -48,7 +48,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
             if (item is null) 
                 return;
             
-            CreateUpdateFormCPU form = new CreateUpdateFormCPU(item);
+            CreateUpdateFormCPU form = new CreateUpdateFormCPU(connector,item);
             form.Show(Owner);
             this.Close();
         }
