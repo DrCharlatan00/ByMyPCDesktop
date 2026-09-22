@@ -71,6 +71,22 @@ namespace ByMyPcDesktop.ConnectToApi
             if (result is null) throw new ApiOperationFailed<ICpuGetService>("Create is failed, Create is abort");
             return (Guid)result;
         }
+
+        public async Task DeleteCpuAsync(Guid id) {
+            CpuModelGet? item = await cpuService.GetByID(id);
+            if (item is not null) {
+                try
+                {
+                    await cpuService.DeleteAsync(id);
+                }
+                catch {
+                    throw new ApiOperationFailed<ICpuGetService>("Item not removed, API Back request");
+                }
+                return;
+            }
+            throw new ApiGetException("Cpu not found");
+
+        }
         #endregion
 
     }

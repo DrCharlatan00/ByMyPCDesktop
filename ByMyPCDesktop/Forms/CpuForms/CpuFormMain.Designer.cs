@@ -234,6 +234,7 @@
             bntDelete.TabIndex = 8;
             bntDelete.Text = "Delete";
             bntDelete.UseVisualStyleBackColor = false;
+            bntDelete.Click += bntDelete_Click;
             // 
             // btnUpdate
             // 

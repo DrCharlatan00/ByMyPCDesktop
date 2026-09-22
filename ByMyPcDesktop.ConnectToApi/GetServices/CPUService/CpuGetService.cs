@@ -68,5 +68,11 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
             return await request.Content.ReadFromJsonAsync<Guid>();
         }
         #endregion
+        #region Delete
+        public async Task DeleteAsync(Guid id) {
+            var request = await httpClient.DeleteAsync($"/api/cpu/{id}");
+            if (!request.IsSuccessStatusCode) throw new Exception("Not Deleted");
+        }
+        #endregion
     }
 }
