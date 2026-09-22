@@ -49,6 +49,10 @@ namespace ByMyPcDesktop.ConnectToApi
             throw new ArgumentException("Guid is wrong");
         }
 
+        public async Task<CpuModelGet?> GetByID(Guid id) {
+            return await cpuService.GetByID(id);
+        }
+
 
     }
 }

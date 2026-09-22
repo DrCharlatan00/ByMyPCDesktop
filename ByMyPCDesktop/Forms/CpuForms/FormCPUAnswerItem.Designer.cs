@@ -41,6 +41,7 @@
             CpuView.Nodes.AddRange(new TreeNode[] { treeNode1 });
             CpuView.Size = new Size(418, 482);
             CpuView.TabIndex = 1;
+            CpuView.AfterSelect += CpuView_AfterSelect;
             // 
             // FormCPUAnswerItem
             // 
