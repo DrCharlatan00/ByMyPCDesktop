@@ -207,6 +207,7 @@
             Controls.Add(UIRequiredBox);
             Name = "CreateUpdateFormCPU";
             Text = "CUFormCPU";
+            FormClosed += CreateUpdateFormCPU_FormClosed;
             UIRequiredBox.ResumeLayout(false);
             UIRequiredBox.PerformLayout();
             UICpuOtherBox.ResumeLayout(false);

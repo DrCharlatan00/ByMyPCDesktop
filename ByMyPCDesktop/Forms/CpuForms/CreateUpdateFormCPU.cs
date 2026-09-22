@@ -119,7 +119,7 @@ namespace ByMyPCDesktop.Forms.CpuForms
                 }
                 try
                 {
-                    CpuModelGet result = await connector.UpdateAsync(dto);
+                    CpuModelGet result = await connector.UpdateCPUAsync(dto);
 #if DEBUG
                     MessageBox.Show(this, $"Item: {result.id}  \n Name:{result.Name}");
                     return;
@@ -150,14 +150,53 @@ namespace ByMyPCDesktop.Forms.CpuForms
 #pragma warning restore CS0162 // IDE Joke
                 }
 
-
+                return;
             }
+
+
+            try
+            {
+                DTOCpuCreateModel dtoCreate = new(
+nameBox.Text,
+checkBoxSocket.Checked == true ? textBox.Text : boxSocket.Text,
+Convert.ToInt32(frequencyBox.Text),
+Convert.ToInt32(coresBox.Text),
+boxIsLive.Checked
+);
+                Guid id = await connector.CreateCPUAsync(dtoCreate);
+                MessageBox.Show(this, $"Cpu created\n ID: {id}", "Cpu is Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show(this, "Cpu data is wrong", "Mistake data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ApiOperationFailed<object>)
+            {
+                MessageBox.Show(this, "Cpu not created", "CPU create Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InvalidCastException)
+            {
+                MessageBox.Show(this, "Cpu data is wrong", "Mistake data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException) {
+                MessageBox.Show(this, "Cpu data is wrong", "Mistake data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(this, "unexpect CPU not created, please call administrator", "CPU create Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Owner?.Show();
             Close();
+        }
+
+        private void CreateUpdateFormCPU_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Owner?.Show();
         }
     }
 }

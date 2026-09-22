@@ -4,6 +4,7 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices.CPUService
 {
     public interface ICpuGetService
     {
+        Task<Guid?> CreateAsync(DTOCpuCreateModel model);
         Task<CpuModelGet?> GetByID(Guid id);
         Task<IEnumerable<CpuModelGet>?> GetFull();
         Task<IEnumerable<CpuSmallModel>?> GetSmallModel();

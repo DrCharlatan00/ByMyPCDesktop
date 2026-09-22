@@ -15,6 +15,7 @@ namespace ByMyPcDesktop.ConnectToApi
             cpuService = new CpuGetService(HttpClient); 
         }
 
+        #region CPU
         public async Task<IEnumerable<CpuModelGet>> GetFullCpusAsync() {
             IEnumerable<CpuModelGet>? data = await cpuService.GetFull();
             if (data is null) throw new ApiGetException();
@@ -54,14 +55,23 @@ namespace ByMyPcDesktop.ConnectToApi
             return await cpuService.GetByID(id);
         }
 
-        public async Task<CpuModelGet> UpdateAsync(DTOCpuUpdateModel model) {
+        public async Task<CpuModelGet> UpdateCPUAsync(DTOCpuUpdateModel model) {
             if (model.id == Guid.Empty) {
                 throw new ArgumentException("Guid can't be null or empty, update abort");
             }
             CpuModelGet? result = await cpuService.UpdateAsync(model);
-            if (result is null) throw new ApiOperationFailed<CpuModelGet>("Operation update is Failed");
+            if (result is null) throw new ApiOperationFailed<ICpuGetService>("Operation update is Failed");
             return result;
         }
+
+        public async Task<Guid> CreateCPUAsync(DTOCpuCreateModel model) {
+            ArgumentException.ThrowIfNullOrWhiteSpace(model.Name);
+            ArgumentException.ThrowIfNullOrWhiteSpace(model.Socket);
+            var result = await cpuService.CreateAsync(model);
+            if (result is null) throw new ApiOperationFailed<ICpuGetService>("Create is failed, Create is abort");
+            return (Guid)result;
+        }
+        #endregion
 
     }
 }

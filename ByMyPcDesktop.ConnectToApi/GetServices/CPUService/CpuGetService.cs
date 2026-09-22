@@ -9,6 +9,7 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
     {
         private readonly HttpClient httpClient = httpClient;
 
+        #region Get
         public async Task<IEnumerable<CpuModelGet>?> GetFull()
         {
             var request = await httpClient.GetAsync("/api/cpu/full");
@@ -50,11 +51,22 @@ namespace ByMyPcDesktop.ConnectToApi.GetServices
 
             return await request.Content.ReadFromJsonAsync<CpuModelGet>();
         }
+        #endregion
 
+        #region Update
         public async Task<CpuModelGet?> UpdateAsync(DTOCpuUpdateModel model) {
             var request = await httpClient.PutAsJsonAsync("/api/cpu/",model);
             if (!request.IsSuccessStatusCode) return null;
             return await request.Content.ReadFromJsonAsync<CpuModelGet>();
         }
+        #endregion
+
+        #region Create 
+        public async Task<Guid?> CreateAsync(DTOCpuCreateModel model) {
+            var request = await httpClient.PostAsJsonAsync("/api/cpu/", model);
+            if (!request.IsSuccessStatusCode) return null;
+            return await request.Content.ReadFromJsonAsync<Guid>();
+        }
+        #endregion
     }
 }

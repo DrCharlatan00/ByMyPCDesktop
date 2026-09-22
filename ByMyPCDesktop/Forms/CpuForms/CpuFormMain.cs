@@ -215,9 +215,12 @@ namespace ByMyPCDesktop.Forms.CpuForms
             }
         }
 
+        #region Create Update Delete
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
+            CreateUpdateFormCPU formUpdate = new(connector);
+            Hide();
+            formUpdate.Show(this);
         }
 
         private async void btnUpdate_Click(object sender, EventArgs e)
@@ -238,5 +241,6 @@ namespace ByMyPCDesktop.Forms.CpuForms
             formUpdate.Show(this);
 
         }
+        #endregion
     }
 }
